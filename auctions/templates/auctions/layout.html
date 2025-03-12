@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Auctions{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'auctions/css/style.css' %}"></head>
+    {% load bootstrap5 %}
+  {% bootstrap_css %}
+<body>
+    <div class="container">
+        <h1>Auctions</h1>
+        <div>
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+        <ul class="nav">
+            {% if user.is_authenticated %}
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">        
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                        </a>
+                
+                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
+                            <li><a href="{%url 'index'%}" class="nav-link px-2 link-body-emphasis" style="color: black;">Active Listings</a></li>
+                            <li><a href="{% url 'categories' %}" class="nav-link px-2 link-body-emphasis" style="color: black;">Categories</a></li>
+                            <li><a href="{% url 'watchlist' %}" class="nav-link px-2 link-body-emphasis" style="color: black;">Watchlist</a></li>
+                            <li><a href="{%url 'add'%}" class="nav-link px-2 link-body-emphasis" style="color: black;">Create Listing</a></li>
+                            <li><a href="{% url 'logout'%}" class="nav-link px-2 link-body-emphasis" style="color: black;">Log out</a></li>
+                        </ul>    
+                    </div>
+                </div>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+        <hr>
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>

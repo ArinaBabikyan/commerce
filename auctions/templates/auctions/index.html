@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% with 'index' as active_page%}
+{%endwith%}
+{% block body %}
+    {% if logged_in == 'yes' %}
+        <h2> Listings</h2>
+            {% for listing in listings %}
+                <a href="{% url 'listing' name=listing.title%}" id="listing_url">
+                    <div class="list">
+                        {% if listing.image_url %}
+                            <div class="image-container">
+                                <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+                            </div>
+                        {% endif %}
+                        <div class="text-container">
+                            {% if listing.closed %}
+                                <p style="color: red">Closed </p>
+                            {%else%}
+                                <p style="color: green">Active </p>
+                            {%endif%}
+                            <h3>{{ listing.title }}</h3>
+                            <p>{{ listing.description }}</p>
+                            <p>Current bid is {{ listing.new_bid }}$.</p>
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <h2>No listing has been posted yet.</h2>
+        {% endfor %}
+    {%else%}
+        <h3>Log in to access listings.</h3>
+    {%endif%}
+{% endblock %}

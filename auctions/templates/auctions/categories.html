@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% with 'categories' as active_page%}
+{%endwith%}
+{% block body %}
+    <h2>Listings categories</h2>
+    <br>
+    {% for category in categories %}
+        <div class="cats">
+            {% if category != None %}
+                <a href="{% url 'show_category' name=category%}" id="listing_url">
+                    <div class="list">
+                        <h6>{{category|title}}</h6>
+                    </div>
+                </a>
+            {%else%}              
+                <a href="{% url 'show_category' name='None'%}" id="listing_url">
+                    <div class="list">
+                        <h6>Without category</h6>
+                    </div>
+                </a>
+            {%endif%}        
+        </div>
+    {% endfor %}
+{% endblock %}

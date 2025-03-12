@@ -1,0 +1,75 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% with 'index' as active_page%}
+{%endwith%}
+{% block body %}
+    <h2>Listing: {{ item.title }}</h2>
+    <div class="list2">
+        {% if item.image_url %}
+            <div class="image-container2">
+                <img src="{{ item.image_url }}" alt="{{ item.title }}">
+            </div>
+        {% endif %}
+        <div class="listing_description">
+            <div>
+                {% if item.you_won %}
+                    <h1 style="color: red">YOU WON THIS AUCTION</h1>
+                {%endif%}
+            </div>
+            <div> 
+                {% if item.closed %}
+                    <p style="color: red">Closed </p>
+                {%else%}
+                    <p style="color: green">Active </p>
+                {%endif%}
+            </div>
+            <div class="text-container2">
+                <h4>Description:</h4>
+                <p>{{ item.description }}</p>
+            </div>
+            <div class="flex-container">
+                <div class="bid-container">
+                    <h4>Bid</h4>
+                    <p>Starting bid: {{ item.starting_bid }}$.</p>
+                    {%if item.new_bid%}
+                        <p>Current bid: {{ item.new_bid }}$.</p>
+                    {%else%}
+                        <p>Current bid: {{ item.starting_bid }}$.</p>
+                    {%endif%}
+                    {%if item.closed == False and close == False %}
+                        <form method="post" action="{%url 'new_bid' name=item.title%}" id="bid_form">
+                            {% csrf_token %}
+                            <input class="form-control" type="text" name="new_bid" placeholder="Enter your bid" id="textinput"> 
+                            <button class="btn btn-primary" type="submit" name="">Place bid</button>
+                        </form>
+                    {%endif%}
+                </div>
+                <div>
+                    <form method="post" action="{%url 'to_wtchl' name=item.title%}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" type="submit" name="">Add to watchlist</button>
+                    </form>
+                </div>
+                <div>
+                    {% if close == True and item.closed == False %}
+                        <form method="post" action="{%url 'close' name=item.title%}">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit" name="">Close auction</button>
+                        </form>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2> Comment section </h2>
+    <div style="border-width: thin">
+        {%for comm in comms %}
+            {{comm}}<br>
+        {%endfor%}
+        <form method="post" action="{%url 'new_com' name=item.title%}" id="new_com">
+            {% csrf_token %}
+            <input class="form-control" type="text" name="new_com" placeholder="Enter your comment" id="textinput"> 
+            <button class="btn btn-primary" type="submit" name="">Place comment</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+body {
+    padding: 10px;
+}
+
+.list {
+    display: flex;
+    gap: 20px; /* Space between image and description */
+    align-items: center;
+}
+.list2{
+    display: flex;
+    gap: 20px; /* Space between image and description */
+    align-items: flex-start; /* Align items at the top */
+}
+.image-container2 {
+    flex-shrink: 0;
+}
+
+.image-container2 img {
+    max-width: 500px; /* Adjust size as needed */
+    height: auto;
+}
+
+.listing_description {
+    display: flex;
+    flex-direction: column; /* Stack description and bid vertically */
+    flex-grow: 1; /* Take up remaining space */
+}
+
+.text-container2 {
+    margin-bottom: 20px; /* Space between description and bid */
+}
+
+.text-container2 h4,
+.bid-container h4 {
+    margin: 0; /* Remove default margin from headings */
+}
+
+.text-container2 p,
+.bid-container p {
+    margin: 5px 0; /* Margin for paragraphs */
+}
+
+.bid-container {
+    display: flex;
+    flex-direction: column; /* Stack bid details vertically */
+}
+
+.image-container {
+    flex-shrink: 0;
+}
+
+.image-container img {
+    max-width: 300px; /* Adjust size as needed */
+    height: auto;
+
+    
+}
+#listing_url:link { 
+    text-decoration: none; 
+  } 
+#listing_url{
+    color:black;
+}
+input{
+    margin:30px;
+}
+
+.cats{
+    height: 100px;
+    padding: 10px;
+}

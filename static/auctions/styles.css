@@ -1,0 +1,49 @@
+body {
+    padding: 10px;
+    background-color: yellow
+}
+.nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.nav-item {
+    display: inline;
+    margin-right: 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: blue;
+}
+
+.list {
+    display: flex;
+    align-items: flex-start;
+}
+
+.image-container {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.image-container img {
+    max-width: 150px; /* Adjust the size as needed */
+    height: auto;
+}
+
+.text-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-container h3 {
+    margin: 0 0 10px 0;
+}
+
+.text-container p {
+    margin: 5px 0;
+}
